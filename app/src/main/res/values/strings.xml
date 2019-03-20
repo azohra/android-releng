@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Code Challenge</string>
+
+    <string name="template_full_name">Name : %s</string>
+    <string name="template_desc">Description : %s</string>
+    <string name="template_url">Project url : %s</string>
+    <string name="template_username">Username : %s</string>
+    <string name="template_star">Stars : %d</string>
+</resources>

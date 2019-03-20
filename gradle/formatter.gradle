@@ -1,0 +1,21 @@
+/*
+ * Code Formatter
+ * https://github.com/diffplug/spotless - formatter for Java, Kotlin, Groovy and others
+ * (tasks: spotlessCheck, spotlessApply resp. spotlessApplyJava)
+ */
+apply plugin: 'com.diffplug.gradle.spotless'
+
+spotless {
+    format 'misc', {
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    kotlin {
+        target '**/*.kt'
+        ktlint(deps.version.ktLint)
+    }
+}

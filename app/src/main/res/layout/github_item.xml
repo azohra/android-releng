@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/min_margin"
+    android:layout_marginTop="@dimen/min_margin"
+    android:layout_marginRight="@dimen/min_margin"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/min_margin"
+            android:layout_marginTop="@dimen/min_margin"
+            android:layout_marginEnd="@dimen/min_margin"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Repository name" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/min_margin"
+            android:layout_marginTop="@dimen/min_margin"
+            android:layout_marginEnd="@dimen/min_margin"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dp"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="This is some description more description more description" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="@dimen/min_margin"
+            android:drawableStart="@android:drawable/btn_star"
+            android:drawableLeft="@android:drawable/btn_star"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_launcher_background"
+            tools:text="5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

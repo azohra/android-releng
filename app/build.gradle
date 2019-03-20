@@ -1,0 +1,155 @@
+apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: "$project.rootDir/gradle/jacoco.gradle"
+
+android {
+    compileSdkVersion deps.buildConfig.compileSdk
+    buildToolsVersion deps.buildConfig.buildTools
+
+    defaultConfig {
+        applicationId deps.buildConfig.applicationId
+        minSdkVersion deps.buildConfig.minSdk
+        targetSdkVersion deps.buildConfig.targetSdk
+        versionCode deps.buildConfig.versionCode
+        versionName deps.buildConfig.versionName
+        testInstrumentationRunner deps.buildConfig.testInstrumentationRunner
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Use same signing config for now.
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+                testLogging {
+                    exceptionFormat = "full"
+                    events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+                }
+            }
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
+    sourceSets {
+        test {
+            resources.srcDirs += ['src/test/resources']
+            resources.srcDirs += ['app/src/test/resources']
+        }
+        androidTest {
+            resources.srcDirs += ['src/androidTest/resources']
+            resources.srcDirs += ['app/src/androidTest/resources']
+        }
+    }
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
+}
+
+/*
+ * App Dependencies
+ */
+dependencies {
+    implementation deps.app.kotlin
+    implementation deps.app.kotlinReflect
+    implementation deps.app.coreKtx
+
+    implementation deps.jetpack.appcompat
+    implementation deps.jetpack.legacy
+    implementation deps.jetpack.constraintlayout
+
+    implementation deps.lifecycle.viewmodel
+    implementation deps.lifecycle.reactivestreams
+
+    implementation deps.navigation.navigationFragment
+    implementation deps.navigation.navigationUi
+
+    implementation deps.app.rxJava
+    implementation deps.app.rxJavaExtensions
+    implementation deps.app.rxAndroid
+
+    implementation deps.app.gson
+
+    implementation deps.app.retrofit
+    implementation deps.app.retrofitGson
+    implementation deps.app.retrofitRx2
+    implementation deps.app.material
+
+    implementation deps.app.glide
+    annotationProcessor deps.app.glideCompiler
+
+    implementation deps.androidTest.espressoIdling
+}
+
+/*
+ * Flavour Dependencies
+ */
+dependencies {
+    /* Debug Dependencies */
+    debugImplementation deps.debug.interceptor
+    debugImplementation deps.debug.chuck
+}
+
+/*
+ * jUnit test Dependencies
+ */
+dependencies {
+    // Unit
+    testImplementation deps.test.junit
+    testImplementation deps.test.openpojo
+
+    testImplementation deps.test.mockito
+    testImplementation deps.test.powermockCore
+    testImplementation deps.test.powermockMockito
+    testImplementation deps.test.powermockJunit
+    testImplementation deps.test.powermock
+
+    testImplementation deps.test.mockitokotlin
+    testImplementation deps.test.mockwebserver
+}
+
+/**
+ * Android test Dependencies
+ */
+dependencies {
+    // Android
+    androidTestImplementation deps.test.junit
+    androidTestImplementation deps.app.retrofit
+    androidTestImplementation deps.app.retrofitGson
+    androidTestImplementation deps.app.retrofitRx2
+
+    androidTestImplementation deps.test.mockwebserver
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation deps.androidTest.runner
+    androidTestImplementation deps.androidTest.junitExt
+    androidTestImplementation deps.androidTest.coreTest
+
+    // Espresso dependencies
+    androidTestImplementation deps.androidTest.espresso
+    androidTestImplementation deps.androidTest.espressoContrib
+    androidTestImplementation deps.androidTest.espressoIntents
+    androidTestImplementation deps.androidTest.espressoIdling
+    androidTestImplementation deps.androidTest.uiautomator
+}
