@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews() {
         // Get Navigation Graph
-        NavHostFragment host = NavHostFragment.create(R.navigation.nav_graph);
+        //NavHostFragment host = NavHostFragment.create(R.navigation.nav_graph);
 
         getSupportFragmentManager()
                 .beginTransaction()
