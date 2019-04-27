@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/asadmansr/android-releng.svg?branch=master)](https://travis-ci.com/asadmansr/android-releng)
 
+test
+
 ### App Detail
 
 We have built a simple app that makes an open API call to get list of repositories in GitHub. The app uses single activity with multiple fragments and has a minimalistic UI with a recycler view with CTA. On tapping of an item it shows a detailed view. On back press, the app navigates back to the listview. And most importantly, for code cverage, [JaCoCo](https://github.com/jacoco/jacoco) has been enabled.
