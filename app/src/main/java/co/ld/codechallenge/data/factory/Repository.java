@@ -8,6 +8,7 @@ import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+
 import co.ld.codechallenge.data.RepositoryManager;
 import io.reactivex.Single;
 

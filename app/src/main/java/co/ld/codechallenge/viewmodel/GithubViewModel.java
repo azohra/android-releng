@@ -4,11 +4,6 @@
 
 package co.ld.codechallenge.viewmodel;
 
-import org.reactivestreams.Publisher;
-
-import java.util.List;
-import java.util.Objects;
-
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +11,15 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.ViewModel;
+
+import org.reactivestreams.Publisher;
+
+import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
+
+import co.ld.DaggerAppComponent;
 import co.ld.codechallenge.data.LiveDataWrap;
 import co.ld.codechallenge.model.search.Repo;
 import co.ld.codechallenge.network.LiveDataSubscriber;
@@ -26,9 +30,8 @@ import io.reactivex.disposables.CompositeDisposable;
 @SuppressWarnings("unused")
 public class GithubViewModel extends ViewModel {
 
-    // Create Repository that acts as single source of data
-    @NonNull
-    private final SearchRepository repository = new SearchRepository();
+    @Inject
+    public SearchRepository repository;
 
     // Create live data holder.
     @NonNull
@@ -38,6 +41,10 @@ public class GithubViewModel extends ViewModel {
     private LifecycleOwner lifecycle;
     @Nullable
     private CompositeDisposable disposables;
+
+    public GithubViewModel() {
+        DaggerAppComponent.create().githubViewModel(this);
+    }
 
     /**
      * Get list of Repositories for the query

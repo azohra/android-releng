@@ -4,11 +4,14 @@
 
 package co.ld.codechallenge.network;
 
-import com.google.gson.GsonBuilder;
-
 import androidx.annotation.CheckResult;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
+
+import com.google.gson.GsonBuilder;
+
+import javax.inject.Singleton;
+
 import co.ld.codechallenge.network.factory.Webservice;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -22,27 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * executes token request upon new token received, executes pending request with new token.
  * In case of token failure, all pending request is dispatched with error.
  */
+@Singleton
 public final class NetworkManager {
-
-    private static final NetworkManager INSTANCE = new NetworkManager();
 
     private static final String BASE_URL = "https://api.github.com";
 
     /* This is usually injected from application class for ease of testing. */
     private Retrofit mRetrofit;
-
-    private NetworkManager() {
-        // Hidden Empty constructor
-    }
-
-    /**
-     * Create instance of {@link NetworkManager}
-     *
-     * @return Single Shared Instance across application
-     */
-    public static NetworkManager getInstance() {
-        return INSTANCE;
-    }
 
     /**
      * Creates <b>Thread safe</b> single copy of network client, with on demand creation.
