@@ -29,7 +29,7 @@ public class Repo implements Parcelable {
     };
     @SerializedName("id")
     private int id;
-    @SerializedName("node_id")
+    @SerializedName("full_name")
     private String fullName;
     @SerializedName("name")
     private String name;

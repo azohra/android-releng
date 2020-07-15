@@ -17,23 +17,22 @@ import io.reactivex.schedulers.Schedulers;
  * Handles core functionality, it is the single source of truth.
  * Gets data from storage, server, saves, handles responses gracefully.
  */
-@Singleton
 public final class RepositoryManager {
 
-//    private static final RepositoryManager INSTANCE = new RepositoryManager();
+    private static final RepositoryManager INSTANCE = new RepositoryManager();
 
-//    private RepositoryManager() {
-//        // Hidden Empty constructor
-//    }
+    private RepositoryManager() {
+        // Hidden Empty constructor
+    }
 
-//    /**
-//     * Create instance of {@link RepositoryManager}
-//     *
-//     * @return Single Shared Instance across application
-//     */
-//    public static RepositoryManager getInstance() {
-//        return INSTANCE;
-//    }
+    /**
+     * Create instance of {@link RepositoryManager}
+     *
+     * @return Single Shared Instance across application
+     */
+    public static RepositoryManager getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Executes request to get data.

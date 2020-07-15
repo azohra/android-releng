@@ -25,13 +25,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * executes token request upon new token received, executes pending request with new token.
  * In case of token failure, all pending request is dispatched with error.
  */
-@Singleton
 public final class NetworkManager {
 
     private static final String BASE_URL = "https://api.github.com";
 
     /* This is usually injected from application class for ease of testing. */
     private Retrofit mRetrofit;
+
+    private static final NetworkManager INSTANCE = new NetworkManager();
+
+    private NetworkManager() {
+        // Hidden Empty constructor
+    }
+
+    /**
+     * Create instance of {@link NetworkManager}
+     *
+     * @return Single Shared Instance across application
+     */
+    public static NetworkManager getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Creates <b>Thread safe</b> single copy of network client, with on demand creation.

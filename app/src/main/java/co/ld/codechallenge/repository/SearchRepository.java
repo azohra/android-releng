@@ -11,10 +11,6 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import co.ld.DaggerAppComponent;
 import co.ld.codechallenge.data.RepositoryManager;
 import co.ld.codechallenge.data.factory.Repository;
 import co.ld.codechallenge.model.search.Repo;
@@ -26,22 +22,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 /**
  * Responsible getting data from cache or server when requested.
  */
-@Singleton
 public class SearchRepository implements Repository<List<Repo>> {
-
-    @Inject
-    public NetworkManager networkManager;
-
-    @Inject
-    public RepositoryManager repositoryManager;
 
     // Query prefix
     private static final String QUERY_PREFIX = "topic:";
     private String query;
-
-    public SearchRepository() {
-        DaggerAppComponent.create().searchRepository(this);
-    }
 
     @Nullable
     @Override
@@ -53,7 +38,7 @@ public class SearchRepository implements Repository<List<Repo>> {
     @Override //Untestable
     public Single<List<Repo>> getRequest() { // <- RepositoryManager.execute <- this.getData
         // Creates network request to get data from server.
-        return networkManager
+        return NetworkManager.getInstance()
                 // Get service
                 .getWebservice()
                 // Get Api
@@ -72,7 +57,7 @@ public class SearchRepository implements Repository<List<Repo>> {
     public Single<List<Repo>> getData(@NonNull String query) { //GithubViewModel
         this.query = Objects.requireNonNull(query, "Query cannot be null").trim();
         // Create request object
-        return repositoryManager
+        return RepositoryManager.getInstance()
                 // Execute repository
                 .execute(this)
                 // Receive data in main thread

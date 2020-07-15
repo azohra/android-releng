@@ -17,9 +17,6 @@ import org.reactivestreams.Publisher;
 import java.util.List;
 import java.util.Objects;
 
-import javax.inject.Inject;
-
-import co.ld.DaggerAppComponent;
 import co.ld.codechallenge.data.LiveDataWrap;
 import co.ld.codechallenge.model.search.Repo;
 import co.ld.codechallenge.network.LiveDataSubscriber;
@@ -30,8 +27,8 @@ import io.reactivex.disposables.CompositeDisposable;
 @SuppressWarnings("unused")
 public class GithubViewModel extends ViewModel {
 
-    @Inject
-    public SearchRepository repository;
+    @NonNull
+    private final SearchRepository repository = new SearchRepository();
 
     // Create live data holder.
     @NonNull
@@ -41,11 +38,6 @@ public class GithubViewModel extends ViewModel {
     private LifecycleOwner lifecycle;
     @Nullable
     private CompositeDisposable disposables;
-
-    public GithubViewModel() {
-        DaggerAppComponent.create().githubViewModel(this);
-    }
-
     /**
      * Get list of Repositories for the query
      *
