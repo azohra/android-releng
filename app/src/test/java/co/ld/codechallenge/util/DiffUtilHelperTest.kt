@@ -2,7 +2,8 @@ package co.ld.codechallenge.util
 
 import co.ld.codechallenge.model.search.Owner
 import co.ld.codechallenge.model.search.Repo
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -28,7 +29,6 @@ class DiffUtilHelperTest {
         right.id = 2
         left.owner.id = 1
         right.owner.id = 2
-
 
         assertFalse(subject.areItemsTheSame(left, right))
     }

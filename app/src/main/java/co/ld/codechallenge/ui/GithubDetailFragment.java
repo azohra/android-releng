@@ -97,7 +97,7 @@ public class GithubDetailFragment extends BaseFragment {
      */
     private void setData() {
         EspressoIdlingResource.increment();
-        name.setText(getString(R.string.template_full_name, mRepo.getFullName()));
+        name.setText(getString(R.string.template_full_name, mRepo.getName()));
         desc.setText(getString(R.string.template_desc, mRepo.getDescription()));
         url.setText(getString(R.string.template_url, mRepo.getUrl()));
         username.setText(getString(R.string.template_username, mRepo.getOwner().getLogin()));

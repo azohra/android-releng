@@ -2,6 +2,7 @@ apply plugin: 'jacoco'
 
 jacoco {
     toolVersion = deps.version.jacoco
+    reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
 tasks.withType(Test) {
@@ -17,6 +18,7 @@ task jacocoFullReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
         reports {
             xml.enabled = true
             html.enabled = true
+            html.destination file("${buildDir}/jacocoHtml")
         }
 
         def fileFilter = ['**/R.class',

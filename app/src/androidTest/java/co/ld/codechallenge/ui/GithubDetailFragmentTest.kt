@@ -34,7 +34,8 @@ class GithubDetailFragmentTest {
         val owner = Owner()
         owner.login = "username"
 
-        repo.fullName = "name"
+        repo.name = "name"
+        repo.fullName = "full name"
         repo.description = "desc"
         repo.url = "google.com"
         repo.owner = owner

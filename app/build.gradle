@@ -3,12 +3,10 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
 apply from: "$project.rootDir/gradle/jacoco.gradle"
 
 android {
     compileSdkVersion deps.buildConfig.compileSdk
-    buildToolsVersion deps.buildConfig.buildTools
 
     defaultConfig {
         applicationId deps.buildConfig.applicationId
@@ -108,7 +106,7 @@ dependencies {
     compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
 
     implementation deps.app.glide
-    annotationProcessor deps.app.glideCompiler
+    kapt deps.app.glideCompiler
 
     implementation deps.androidTest.espressoIdling
 }
@@ -174,4 +172,3 @@ dependencies {
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.12.0'
     androidTestImplementation "it.xabaras.android.espresso:recyclerview-child-actions:1.0"
 }
-
