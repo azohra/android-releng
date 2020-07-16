@@ -3,7 +3,6 @@ package co.ld.codechallenge.ui
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -36,6 +35,7 @@ class GithubListFragmentTest {
     fun setUp() {
         EspressoIdlingResource.setDefaultIdlingResource()
         IdlingRegistry.getInstance().register(EspressoIdlingResource.getIdlingResource())
+
         val httpClient = OkHttpClient.Builder()
 
         mockWebServer = MockWebServer()
@@ -66,7 +66,7 @@ class GithubListFragmentTest {
                 themeResId = R.style.AppTheme
         )
 
-        onView(withId(R.id.repo_list)).check(ViewAssertions.matches(withListSize(0)))
+        onView(withId(R.id.repo_list)).check(matches(withListSize(0)))
     }
 
     @Test
@@ -82,19 +82,6 @@ class GithubListFragmentTest {
         )
 
         onView(withId(R.id.repo_list)).check(matches(withListSize(2)))
-    }
-
-    @Test
-    fun onListItemPress_shouldLaunchGithubDetailFragment() {
-        val response = MockResponse()
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(multipleRepo)
-
-        mockWebServer.enqueue(response)
-
-        launchFragmentInContainer<GithubListFragment>(
-                themeResId = R.style.AppTheme
-        )
 
         onView(withId(R.id.repo_list))
                 .check(matches(

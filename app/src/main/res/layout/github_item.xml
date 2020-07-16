@@ -50,7 +50,6 @@
             android:layout_height="80dp"
             android:layout_marginEnd="@dimen/min_margin"
             android:drawableStart="@android:drawable/btn_star"
-            android:drawableLeft="@android:drawable/btn_star"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
