@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -152,5 +153,10 @@ dependencies {
     androidTestImplementation deps.androidTest.espressoIntents
     androidTestImplementation deps.androidTest.espressoIdling
     androidTestImplementation deps.androidTest.uiautomator
+}
+//Firebase dependency
+dependencies{
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
 
