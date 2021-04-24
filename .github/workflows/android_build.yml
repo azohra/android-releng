@@ -8,7 +8,7 @@ on:
       - 'feature-automaton'
 
 jobs:
-  test:
+  build:
     name: Run Unit Tests
     runs-on: ubuntu-18.04
 
@@ -25,11 +25,9 @@ jobs:
 
       - name: Run kLint check
         run: |
-         cd cacheList/
           ./gradlew ktlintCheck
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
-   
       - name: Build debug APK
         run: bash ./gradlew assembleDebug --stacktrace
       - name: Upload APK
