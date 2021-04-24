@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Run Unit Tests
+    name: Run Build 
     runs-on: ubuntu-18.04
 
     steps:
@@ -22,10 +22,6 @@ jobs:
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
         run: echo $FIREBASE_SECRET > app/google-services.json
-
-      - name: Run kLint check
-        run: |
-          ./gradlew ktlintCheck
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
       - name: Build debug APK
