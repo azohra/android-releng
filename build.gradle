@@ -4,6 +4,7 @@ buildscript {
 
     addRepos(repositories)
     dependencies {
+        classpath 'com.google.gms:google-services:4.3.5'
         classpath deps.buildPlugin.android
         classpath deps.buildPlugin.spotless
         classpath deps.buildPlugin.safeArgs

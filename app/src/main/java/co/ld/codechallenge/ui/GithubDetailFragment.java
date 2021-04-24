@@ -116,11 +116,19 @@ public class GithubDetailFragment extends BaseFragment {
                 .into(dp);
 
         EspressoIdlingResource.decrement();
-
-        fab.setOnClickListener((View v) -> {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(uri));
-            startActivity(i);
-        });
+        //Resolved the crash when clicking the floating action button
+        if(fab != null) {
+            fab.setOnClickListener((View v) -> {
+                uri = mRepo.getUrl();
+                if (!uri.startsWith("https://") && !uri.startsWith("http://")){
+                    uri = "http://" + url;
+                }
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                if(i.resolveActivity(getActivity().getPackageManager())!= null) {
+                    i.setData(Uri.parse(uri));
+                    startActivity(i);
+                }
+            });
+        }
     }
 }
