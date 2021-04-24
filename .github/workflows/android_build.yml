@@ -28,9 +28,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Decode google-services.json
+        env:
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        run: echo $FIREBASE_SECRET > app/google-services.json
+
+      - name: Run kLint check
+        run: |
+         cd cacheList/
+          ./gradlew ktlintCheck
       - name: Build debug APK
         run: bash ./gradlew assembleDebug --stacktrace
       - name: Upload APK
